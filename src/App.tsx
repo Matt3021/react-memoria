@@ -1,5 +1,6 @@
 import './App.css'
 import Logo from './assets/devmemory_logo.png'
+import { InfoItem } from './components/InfoItem'
 
 export const App = () => {
   return (
@@ -12,7 +13,8 @@ export const App = () => {
         </a>
 
         <div className='info-area w-max my-3 max-[750px]:flex max-[750px]:justify-around max-[750px]:text-center'>
-          ...
+          <InfoItem label='Tempo' value='00:00' />
+          <InfoItem label='Movimentos' value='0'/>
         </div>
 
         <button>Reiniciar</button>
