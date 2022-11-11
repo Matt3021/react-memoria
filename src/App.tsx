@@ -1,10 +1,20 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import Logo from './assets/devmemory_logo.png'
 import { Button } from './components/Button'
 import { InfoItem } from './components/InfoItem'
 import RestartIcon from './svgs/restart.svg'
+import { GridItemType } from './types/GridItemType'
 
 export const App = () => {
+  const [playing, setPlaying] = useState<boolean>(false);
+  const [timeElapsed, setTimeElapsed] = useState<number>(0);
+  const [moveCount, setMoveCount] = useState<number>(0);
+  const [showCount, setShowCount] = useState<number>(0);
+  const [gridItems, setGridItems] = useState<GridItemType[]>([])
+
+  useEffect(() => resetAndCreateGrid(), [])
+
   const resetAndCreateGrid = () => {
 
   }
@@ -26,7 +36,7 @@ export const App = () => {
         <Button label='Reiniciar' icon={RestartIcon} onClick={resetAndCreateGrid}/>
       </div>
       <div className='grid-area flex-1 flex justify-end max-[750px]:justify-center max-[750px]:mx-5'>
-        ...
+        <div className='grid grid-cols-4 gap-3 w-[430px]'></div>
       </div>
     </div>
   )
