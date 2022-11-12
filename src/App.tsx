@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Logo from './assets/devmemory_logo.png';
+
 import { Button } from './components/Button';
 import { InfoItem } from './components/InfoItem';
+import { GridItem } from './components/GridItem';
+
+import Logo from './assets/devmemory_logo.png';
 import RestartIcon from './svgs/restart.svg';
+
 import { GridItemType } from './types/GridItemType';
 import { items } from './data/items'
+
 
 export const App = () => {
   const [playing, setPlaying] = useState<boolean>(false);
@@ -46,6 +51,10 @@ export const App = () => {
     setPlaying(true);
   }
 
+  const handleItemClick = () => {
+
+  }
+
   return (
     <div className='container w-screen max-w-3xl m-auto flex py-14 max-[750px]:flex-col'>
       <div className='info flex flex-col w-auto max-[750px]:mb-12 max-[750px]:items-center'>
@@ -63,7 +72,15 @@ export const App = () => {
         <Button label='Reiniciar' icon={RestartIcon} onClick={resetAndCreateGrid}/>
       </div>
       <div className='grid-area flex-1 flex justify-end max-[750px]:justify-center max-[750px]:mx-5'>
-        <div className='grid grid-cols-4 gap-3 w-[430px]'></div>
+        <div className='grid grid-cols-4 gap-3 w-[430px]'>
+          {gridItems.map((item, index) => (
+            <GridItem 
+              key={index}
+              item={item}
+              onClick={() => handleItemClick()}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
