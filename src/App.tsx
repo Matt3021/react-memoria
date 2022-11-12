@@ -10,6 +10,7 @@ import RestartIcon from './svgs/restart.svg';
 
 import { GridItemType } from './types/GridItemType';
 import { items } from './data/items'
+import { formatTimeElapsed } from './helpers/formatTimeElapsed';
 
 
 export const App = () => {
@@ -20,6 +21,13 @@ export const App = () => {
   const [gridItems, setGridItems] = useState<GridItemType[]>([])
 
   useEffect(() => resetAndCreateGrid(), [])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (playing) setTimeElapsed(timeElapsed + 1);
+    }, 1000);
+    return () => clearInterval(timer)
+  }, [playing, timeElapsed])
 
   const resetAndCreateGrid = () => {
     // step 1 - reset the game
@@ -65,7 +73,7 @@ export const App = () => {
         </a>
 
         <div className='info-area w-max my-3 max-[750px]:flex max-[750px]:justify-around max-[750px]:text-center'>
-          <InfoItem label='Tempo' value='00:00' />
+          <InfoItem label='Tempo' value={formatTimeElapsed(timeElapsed)} />
           <InfoItem label='Movimentos' value='0'/>
         </div>
 
