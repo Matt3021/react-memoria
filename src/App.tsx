@@ -132,7 +132,7 @@ export const App = () => {
         <Button label='Reiniciar' icon={RestartIcon} onClick={resetAndCreateGrid}/>
       </div>
       <div className='grid-area flex-1 flex justify-end max-[750px]:justify-center max-[750px]:mx-5'>
-        <div className='grid grid-cols-4 gap-3 w-[430px]'>
+        <div className='grid grid-cols-4 gap-3 w-[430px] max-[750px]:grid-cols-3'>
           {gridItems.map((item, index) => (
             <GridItem 
               key={index}
