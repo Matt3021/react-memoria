@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import Logo from './assets/devmemory_logo.png'
-import { Button } from './components/Button'
-import { InfoItem } from './components/InfoItem'
-import RestartIcon from './svgs/restart.svg'
-import { GridItemType } from './types/GridItemType'
+import { useEffect, useState } from 'react';
+import './App.css';
+import Logo from './assets/devmemory_logo.png';
+import { Button } from './components/Button';
+import { InfoItem } from './components/InfoItem';
+import RestartIcon from './svgs/restart.svg';
+import { GridItemType } from './types/GridItemType';
+import { items } from './data/items'
 
 export const App = () => {
   const [playing, setPlaying] = useState<boolean>(false);
@@ -16,7 +17,33 @@ export const App = () => {
   useEffect(() => resetAndCreateGrid(), [])
 
   const resetAndCreateGrid = () => {
+    // step 1 - reset the game
+    setTimeElapsed(0);
+    setMoveCount(0);
+    setShowCount(0);
 
+    // step 2 - create the grid
+    // step 2.1 - create a grid empty
+    let tmpGrid: GridItemType[] = [];
+    for (let i = 0; i < (items.length * 2); i++) tmpGrid.push({
+        item: null, shown: false, permanentShown: false
+      });
+    // step 2.2 - fill the grid
+    for (let w = 0; w < 2; w++) {
+      for (let i = 0; i < (items.length); i++) {
+        let pos = -1
+        while (pos < 0 || tmpGrid[pos].item !== null) {
+          pos = Math.floor(Math.random() * (items.length * 2));
+        }
+        tmpGrid[pos].item = i
+      };
+    };
+
+    // step 2.3 - put on state
+    setGridItems(tmpGrid);
+
+    //step 3 - start the game
+    setPlaying(true);
   }
 
   return (
